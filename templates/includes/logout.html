@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Выход - Saplings.Pro{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-green-50 dark:bg-gray-900">
+    <div class="w-full max-w-md p-8 space-y-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold text-green-800 dark:text-green-200 text-center">Выход</h1>
+        <p class="text-green-600 dark:text-green-300 text-center">Вы уверены, что хотите выйти?</p>
+        <form method="post" class="space-y-6">
+            {% csrf_token %}
+            <button
+                type="submit"
+                class="w-full px-4 py-2 font-medium text-white bg-green-600 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500"
+            >
+                Выйти
+            </button>
+        </form>
+        <div class="text-center">
+            <p class="text-green-600 dark:text-green-300"><a href="/" class="text-green-700 dark:text-green-200 hover:underline">Вернуться на главную</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

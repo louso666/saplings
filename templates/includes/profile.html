@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Личный кабинет - Saplings.Pro{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+        <h1 class="text-3xl font-bold text-green-800 dark:text-green-200 mb-4">Личный кабинет</h1>
+        <div class="space-y-6">
+            <!-- Информация о пользователе -->
+            <div>
+                <h2 class="text-xl font-bold text-green-700 dark:text-green-200">Информация о пользователе</h2>
+                <p class="text-green-600 dark:text-green-300">Имя пользователя: <span class="font-semibold">{{ user.username }}</span></p>
+                <p class="text-green-600 dark:text-green-300">Email: <span class="font-semibold">{{ user.email }}</span></p>
+            </div>
+
+            <!-- Действия -->
+            <div>
+                <h2 class="text-xl font-bold text-green-700 dark:text-green-200">Действия</h2>
+                <ul class="space-y-2">
+                    <li><a href="/settings/" class="text-green-600 dark:text-green-300 hover:underline">Настройки</a></li>
+                    <li><a href="/logout/" class="text-green-600 dark:text-green-300 hover:underline">Выйти</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

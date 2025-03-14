@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Статьи про Саженцы{% endblock %}
+
+{% block content %}
+{% for article in articles %}
+<div class="bg-white p-8 rounded-lg shadow-md">
+    <h1 class="text-3xl font-bold text-lime-800 mb-4">{{ article.title }}</h1>
+    <p class="text-lime-600">{% endfor %}</p>
+    <div class="mt-6">
+        <a href="/about/" class="bg-lime-500 text-white px-4 py-2 rounded-lg hover:bg-lime-400">Узнать больше</a>
+    </div>
+</div>
+
+{% endblock %}

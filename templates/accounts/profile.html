@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Profile</h2>
+<p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+<p>Email: {{ user.email }}</p>
+{% if user.avatar %}
+    <p>Avatar: <img src="{{ user.avatar.url }}" alt="Avatar" width="100"></p>
+{% endif %}
+<p>Phone: {{ user.phone_number }}</p>
+<p>Address: {{ user.address }}</p>
+<p>City: {{ user.city }}</p>
+<p>Postal Code: {{ user.postal_code }}</p>
+<p>Country: {{ user.country }}</p>
+<p>Date of Birth: {{ user.date_of_birth }}</p>
+<p>Bio: {{ user.bio }}</p>
+<a href="{% url 'edit_profile' %}">Edit Profile</a>
+{% endblock %}

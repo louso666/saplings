@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" class="{% if request.COOKIES.theme == 'dark' %}dark{% endif %}">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Saplings.Pro{% endblock %}</title>
+    <!-- Подключение Tailwind CSS и Flowbite через CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@4.0.11/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Подключение Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Кастомные стили (если нужны) -->
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body class="bg-green-100 dark:bg-gray-900">
+    <!-- Шапка -->
+    {% include 'includes/header.html' %}
+
+    <!-- Основное меню -->
+    {% include 'includes/menu.html' %}
+
+    <!-- Основной контент -->
+    <main class="container mx-auto px-4 py-8 max-w-7xl">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Подвал -->
+    {% include 'includes/footer.html' %}
+
+    <!-- Подключение Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <!-- Кастомные скрипты (если нужны) -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+
+    <!-- Скрипт для переключения темы -->
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const theme = html.classList.contains('dark') ? 'light' : 'dark';
+            html.classList.toggle('dark');
+            document.cookie = `theme=${theme}; path=/; max-age=31536000; SameSite=Lax`;
+        }
+
+        // При загрузке страницы применяем сохраненную тему
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = document.cookie.replace(/(?:(?:^|.*;\s*)theme\s*=\s*([^;]*).*$|^.*$/, '$1');
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+            }
+        });
+    </script>
+</body>
+</html>

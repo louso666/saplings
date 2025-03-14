@@ -1,0 +1,30 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+{{ block.super }}
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const contentField = document.getElementById('id_content');
+    const isMarkdownField = document.getElementById('id_is_markdown');
+    const previewDiv = document.createElement('div');
+    previewDiv.id = 'markdown-preview';
+    previewDiv.style.border = '1px solid #ccc';
+    previewDiv.style.padding = '10px';
+    previewDiv.style.marginTop = '10px';
+    contentField.parentNode.insertBefore(previewDiv, contentField.nextSibling);
+
+    function updatePreview() {
+        if (isMarkdownField.checked) {
+            previewDiv.innerHTML = marked.parse(contentField.value);
+        } else {
+            previewDiv.innerHTML = contentField.value;
+        }
+    }
+
+    contentField.addEventListener('input', updatePreview);
+    isMarkdownField.addEventListener('change', updatePreview);
+    updatePreview();
+});
+</script>
+{% endblock %}

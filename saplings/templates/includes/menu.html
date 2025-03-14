@@ -1,0 +1,82 @@
+{% load static %}
+
+<nav class="bg-lime-400 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+            <!-- Логотип -->
+            <div class="flex items-center">
+                <a href="/" class="flex items-center">
+                    <img src="{% static 'images/logo.png' %}" alt="Логотип" class="h-8 w-auto">
+                    <span class="font-semibold text-gray-900 text-lg ml-2">Про Саженцы</span>
+                </a>
+            </div>
+
+            <!-- Основное меню -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="/" class="text-gray-900 hover:text-gray-600">Главная</a>
+                <a href="/shop/" class="text-gray-900 hover:text-gray-600">Магазин</a>
+                <a href="/статьи/" class="text-gray-900 hover:text-gray-600">Блог</a>
+                <a href="/about/" class="text-gray-900 hover:text-gray-600">О нас</a>
+                <a href="/contact/" class="text-gray-900 hover:text-gray-600">Контакты</a>
+            </div>
+
+            <!-- Правая часть меню: личный кабинет и корзина -->
+            <div class="flex items-center space-x-4">
+                <!-- Иконка корзины -->
+                <a href="/cart/" class="text-gray-900 hover:text-gray-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                    </svg>
+                </a>
+
+                <!-- Личный кабинет или кнопка "Войти" -->
+                {% if user.is_authenticated %}
+                    <!-- Выпадающее меню для авторизованного пользователя -->
+                    <div class="relative">
+                        <button id="dropdownUserButton" data-dropdown-toggle="dropdownUser" class="flex items-center text-gray-900 hover:text-gray-600 focus:outline-none" type="button">
+                            <span class="mr-2">{{ user.username }}</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <!-- Выпадающее меню -->
+                        <div id="dropdownUser" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownUserButton">
+                                <li>
+                                    <a href="{% url 'profile' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Профиль</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'logout' %}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Выйти</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                {% else %}
+                    <!-- Кнопка "Войти" для неавторизованных пользователей -->
+                    <a href="{% url 'login' %}" class="text-gray-900 hover:text-gray-600">Войти</a>
+                {% endif %}
+            </div>
+
+            <!-- Кнопка для мобильного меню -->
+            <div class="md:hidden flex items-center">
+                <button @click="open = !open" class="outline-none mobile-menu-button">
+                    <svg class="w-6 h-6 text-gray-900" x-show="!open" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg class="w-6 h-6 text-gray-900" x-show="open" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                        <path d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Мобильное меню -->
+    <div class="mobile-menu md:hidden" x-show="open" @click.away="open = false">
+        <a href="/" class="block py-2 px-4 text-sm hover:bg-gray-200">Главная</a>
+        <a href="/shop/" class="block py-2 px-4 text-sm hover:bg-gray-200">Магазин</a>
+        <a href="/blog/" class="block py-2 px-4 text-sm hover:bg-gray-200">Блог</a>
+        <a href="/about/" class="block py-2 px-4 text-sm hover:bg-gray-200">О нас</a>
+        <a href="/contact/" class="block py-2 px-4 text-sm hover:bg-gray-200">Контакты</a>
+    </div>
+</nav>

@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru" x-data="{ open: false }">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Saplings.Pro{% endblock %}</title>
+    <!-- Подключение Tailwind CSS и Flowbite через CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet">
+    <!-- Подключение Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Кастомные стили (если нужны) -->
+    <link href="{% static 'css/saplings.css' %}" rel="stylesheet">
+</head>
+<body class="bg-lime-50">
+    <!-- Включение меню -->
+    {% include 'includes/navbar.html' %}
+
+    <!-- Основной контент -->
+    <main class="container mx-auto px-4 py-8">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Подключение Flowbite JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+    <!-- Кастомные скрипты (если нужны) -->
+    <script src="{% static 'js/saplings.js' %}"></script>
+</body>
+</html>

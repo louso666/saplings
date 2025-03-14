@@ -1,0 +1,5 @@
+<h1>{{ gallery.name }}</h1>
+<p>{{ gallery.description }}</p>
+{% for image in images %}
+    <img src="data:image/jpeg;base64,{{ image.image_data.decode('base64') }}" alt="{{ image.caption }}">
+{% endfor %}

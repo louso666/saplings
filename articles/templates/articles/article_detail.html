@@ -1,0 +1,4 @@
+<!-- articles/templates/articles/article_detail.html -->
+<h1>{{ article.title }}</h1>
+<div>{{ article.content|safe }}</div>
+<a href="{% url 'article_list' %}">Back to Articles</a>

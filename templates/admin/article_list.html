@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<h1>Статьи</h1>
+<a href="{% url 'admin_article_create' %}" class="btn btn-success">Создать</a>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Заголовок</th>
+      <th>Категории</th>
+      <th>Дата</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for article in articles %}
+    <tr>
+      <td>{{ article.title }}</td>
+      <td>{{ article.categories|join:", " }}</td>
+      <td>{{ article.pub_date }}</td>
+      <td>
+        <a href="{% url 'admin_article_edit' article.id %}" class="btn btn-primary">Редактировать</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
